@@ -1,0 +1,32 @@
+//本部分代码主要实现了购物车的有关功能
+<table width="95%" align="center" cellpadding="0" cellspacing="0">
+	<tr align="center" bgcolor="#efeae5">
+		<td align="left" width="50px">
+<input type="checkbox" id="selectAll" checked="checked"/><label for="selectAll">全选</label>
+		</td>
+		<td colspan="2">商品名称</td>
+		<td>单价</td>
+		<td>数量</td>
+		<td>小计</td>
+		<td>操作</td>
+	</tr>
+<c:forEach items="${cartItemList }" var="cartItem">
+	
+		<td align="left" width="400px">
+<a href="<c:url value='/jsps/book/desc.jsp'/>"><span>${cartItem.book.bname }</span></a>
+		</td>
+<td><span>&yen;<span class="currPrice">${cartItem.book.currPrice }</span></span></td>
+		<td>
+<a class="jian" id="${cartItem.cartItemId }Jian"></a><input class="quantity" readonly="readonly" id="${cartItem.cartItemId }Quantity" type="text" value="${cartItem.quantity }"/><a class="jia" id="${cartItem.cartItemId }Jia"></a>
+		</td>
+		<td width="100px">
+<span class="price_n">&yen;<span class="subTotal" id="${cartItem.cartItemId }Subtotal">${cartItem.subtotal }</span></span>
+		</td>
+		<td>
+<a href="<c:url value='/CartItemServlet?method=batchDelete&cartItemIds=${cartItem.cartItemId }'/>">删除</a>
+		</td>
+	</tr>
+</c:forEach>
+//在本模块中用户可以对自己购物车中的图书进行清空，或者结算生成新的订单。
+//在生成订单之前用户可已更改购买图书的数量或者直接删除这本图书。
+//在提交订单界面用户可以给该收货地址，提交订单后可到订单界面查看订单状态。
